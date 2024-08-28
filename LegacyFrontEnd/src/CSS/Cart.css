@@ -1,0 +1,9 @@
+/* Specific styles for the Cart component */
+.cart-container {
+    position: fixed;
+    right: 100px;
+    top: 170px;
+    width: 25%; /* Ensure this is not too wide for your screen */
+    overflow-y: auto; /* Allows scrolling within the cart if it's too tall */  
+    font-size: x-large;
+}

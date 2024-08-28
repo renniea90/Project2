@@ -1,0 +1,85 @@
+body {
+  font-family: 'Wix Madefor Display', Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  color: #333;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.item-cards-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  padding: 20px;
+  align-items: start;
+  position: fixed;
+  left: 10px;
+  top: 150px;
+}
+
+.item-card {
+  background-color: #fff;
+  padding: 170px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+.item-card-content h3 {
+  margin: 0 0 10px 0;
+  font-size: x-large;
+  font-family: 'Wix Madefor Display', Helvetica, sans-serif;
+}
+
+.item-card-content p {
+  margin: 4px 0;
+  font-size: x-large;
+  font-family: 'Wix Madefor Display', Helvetica, sans-serif;
+}
+
+.add-to-cart-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-size: x-large;
+  cursor: pointer;
+  margin-top: 10px;
+  align-self: center;
+}
+
+.add-to-cart-button:hover {
+  background-color: #45a049;
+}
+
+.main-container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 1024px) {
+  .item-cards-container {
+      grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .item-cards-container {
+      grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .item-cards-container {
+      grid-template-columns: 1fr;
+  }
+}
