@@ -31,8 +31,9 @@ public class ItemController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> addItem(@RequestBody Item item) {
-        return this.service.addItem(item);
+    public ResponseEntity<ResponseEntity<?>> addItem(@RequestBody Item item) {
+        ResponseEntity<?> savedItem = service.addItem(item);
+        return ResponseEntity.ok(savedItem);  // Return the saved item as JSON
     }
 
     @DeleteMapping("/remove/{id}")

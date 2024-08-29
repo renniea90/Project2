@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 
 const CartContext = createContext();
@@ -8,30 +8,29 @@ export const CartProvider = ({ children }) => {
     const [newCart, setNewCart] = useState(null);
     const [items, setItems] = useState([]);
 
+    // Fetch items when the component mounts
     useEffect(() => {
         fetchItems();
     }, []);
 
-    const fetchItems = async () => {
+    // Fetch items function
+    const fetchItems = useCallback(async () => {
         try {
             const response = await axios.get('http://localhost:8082/item/getAll');
             setItems(response.data);
-            console.log('Fetched items:', response.data);  // Add logging to verify data fetching
+            console.log('Fetched items:', response.data);
         } catch (error) {
             console.error('Error fetching items:', error);
         }
-    };
+    }, []);
 
-    const addToCart = async (item) => {
+    // Function to add an item to the cart
+    const addToCart = useCallback(async (item) => {
         try {
-            console.log('Attempting to reserve item:', item);
             const response = await axios.post(`http://localhost:8082/item/reserve/${item.id}`, {
-                quantity: 1  // Sending as an object with the quantity field
+                quantity: 1
             });
-    
             if (response.status === 200) {
-                console.log('Item reserved successfully:', response.data);
-    
                 setCartItems((prevItems) => {
                     const existingItem = prevItems.find((i) => i.id === item.id);
                     if (existingItem) {
@@ -41,32 +40,27 @@ export const CartProvider = ({ children }) => {
                     }
                     return [...prevItems, { ...item, quantity: 1 }];
                 });
-    
                 setItems((prevItems) =>
                     prevItems.map((i) =>
                         i.id === item.id ? { ...i, quantity: i.quantity - 1 } : i
                     )
                 );
             } else {
-                console.log('Failed to reserve item:', response.data);
                 alert('This item is out of stock!');
             }
         } catch (error) {
-            console.error('Error adding item to cart:', error.response ? error.response.data : error.message);
             alert('Failed to add item to cart. Please try again later.');
         }
-    };
+    }, []);
 
-    const removeFromCart = async (id) => {
+    // Function to remove an item from the cart
+    const removeFromCart = useCallback(async (id) => {
         try {
             const itemToRemove = cartItems.find((item) => item.id === id);
             if (itemToRemove) {
-                console.log('Attempting to release stock for item:', itemToRemove);
                 await axios.post(`http://localhost:8082/item/release/${id}`, {
                     quantity: itemToRemove.quantity
                 });
-                console.log('Item stock released successfully');
-
                 setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
                 setItems((prevItems) =>
                     prevItems.map((i) =>
@@ -75,15 +69,15 @@ export const CartProvider = ({ children }) => {
                 );
             }
         } catch (error) {
-            console.error('Error removing item from cart:', error.response ? error.response.data : error.message);
             alert('Failed to remove item from cart. Please try again later.');
         }
-    };
+    }, [cartItems]);
 
-    const clearCart = () => {
+    // Clear the cart
+    const clearCart = useCallback(() => {
         setCartItems([]);
         setNewCart(null);
-    };
+    }, []);
 
     return (
         <CartContext.Provider
@@ -95,8 +89,8 @@ export const CartProvider = ({ children }) => {
                 clearCart,
                 newCart,
                 setNewCart,
-                setCartItems,
-                fetchItems,  // Ensure fetchItems is exposed to trigger re-fetch
+                setItems,
+                fetchItems, // Make sure fetchItems is exposed here
             }}
         >
             {children}

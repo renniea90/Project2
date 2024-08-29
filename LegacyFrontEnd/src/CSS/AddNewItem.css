@@ -1,0 +1,23 @@
+.add-new-item-card {
+    background-color: #fff;
+    border-radius: 0px;
+    padding: 20px;
+    text-align: left;
+    margin-bottom: 20px;
+    position: fixed;
+    right: 100px;
+    top: 170px;
+    width: 25%; /* Ensure this is not too wide for your screen */
+    overflow-y: auto; /* Allows scrolling within the cart if it's too tall */
+    font-size: x-large;
+}
+
+input[type="text"], input[type="number"] {
+    padding: 5px;
+    margin: 5px 0;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 0px;
+    font-size: x-large;
+    font-family: 'Wix Madefor Display', Helvetica, sans-serif;
+}

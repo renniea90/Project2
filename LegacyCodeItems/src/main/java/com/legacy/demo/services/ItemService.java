@@ -30,9 +30,10 @@ public class ItemService {
         }
     }
 
-    public ResponseEntity<?> addItem(Item item) {
-        repo.save(item);
-        return ResponseEntity.ok("Item added successfully");
+    // Updated method to return the newly created item as an ItemDto
+    public ResponseEntity<ItemDto> addItem(Item item) {
+        Item savedItem = repo.save(item); // Save the item and return the saved instance
+        return ResponseEntity.ok(new ItemDto(savedItem)); // Return the saved item as an ItemDto response
     }
 
     public ResponseEntity<?> removeItem(Integer id) {
