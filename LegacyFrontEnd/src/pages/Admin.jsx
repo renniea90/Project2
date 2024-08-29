@@ -1,66 +1,55 @@
 import React, { useState } from 'react';
-import useFetchItems from '../components/FetchItems';
+import axios from 'axios'; 
 import AddProduct from '../components/AddProduct';
 import UpdateProduct from '../components/UpdateProduct';
 import ProductListTable from '../components/ProductListTable';
 import DeleteProduct from '../components/DeleteProduct'; 
 import '../CSS/AdminPage.css'; 
 import '../CSS/Modal.css';
+import { useCart } from '../components/CartContext';
 
 const AdminPage = () => {
-    const { items: products, error, refetch } = useFetchItems();
+    const { items, setItems } = useCart();
     const [productToUpdate, setProductToUpdate] = useState(null);
     const [showUpdateDialogue, setShowUpdateDialogue] = useState(false);
     const [productIdToDelete, setProductIdToDelete] = useState(null);
-    const [sortConfig, setSortConfig] = useState({ key: 'id', direction: 'ascending' });
 
-    const requestSort = (key) => {
-        let direction = 'ascending';
-        if (sortConfig.key === key && sortConfig.direction === 'ascending') {
-            direction = 'descending';
+    const refetchItems = async () => {
+        try {
+            const response = await axios.get('http://localhost:8082/items/getAll');
+            setItems(response.data);
+        } catch (error) {
+            console.error('Error fetching items:', error);
         }
-        setSortConfig({ key, direction });
     };
-
-   
-    if (error) return <div>Error loading products: {error.message}</div>;
 
     return (
         <div>
-            <div className="container2">               
-                <AddProduct onAddProduct={refetch} /> 
+            <div className="container2">
+                <AddProduct onAddProduct={refetchItems} />
             </div>
             <div className="table-wrapper">
                 <ProductListTable
-                    products={products}
+                    products={items}
                     onUpdate={(product) => {
                         setProductToUpdate(product);
                         setShowUpdateDialogue(true);
                     }}
-                    onDelete={(id) => setProductIdToDelete(id)} // Set ID to delete
-                    onRequestSort={requestSort}
-                    sortConfig={sortConfig}
+                    onDelete={(id) => setProductIdToDelete(id)}
                 />
             </div>
             {productIdToDelete !== null && (
                 <DeleteProduct
                     productIdToDelete={productIdToDelete}
-                    onCancel={() => setProductIdToDelete(null)} // Clear the ID
-                    onConfirm={() => {
-                        refetch(); // Refresh the products list
-                        setProductIdToDelete(null); // Clear the product ID
-                    }}
+                    onCancel={() => setProductIdToDelete(null)}
+                    onConfirm={refetchItems}
                 />
             )}
             {showUpdateDialogue && productToUpdate && (
                 <UpdateProduct
                     product={productToUpdate}
                     onCancel={() => setShowUpdateDialogue(false)}
-                    onUpdateSuccess={() => {
-                        refetch(); // Refresh the products list
-                        setShowUpdateDialogue(false);
-                        setProductToUpdate(null);
-                    }}
+                    onUpdateSuccess={refetchItems}
                 />
             )}
         </div>

@@ -1,9 +1,56 @@
-/* Specific styles for the Cart component */
-.cart-container {
+.cart-container, .cart-component {
     position: fixed;
-    right: 100px;
-    top: 170px;
-    width: 25%; /* Ensure this is not too wide for your screen */
-    overflow-y: auto; /* Allows scrolling within the cart if it's too tall */  
+    right: 0;
+    top: 120px;
+    width: 25%;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    overflow-y: auto;
+    z-index: 1000;
+    border-left: 1px solid #ddd;
+}
+
+.cart-component h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    border-bottom: 5px solid #eee;
+    padding: 8px;
+    text-align: center;
+}
+
+tfoot td {
+    font-weight: bold;
+}
+
+/* Button styles */
+.button-container, .cart-item-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+button {
+    background-color: #4a4a4a;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 0;
     font-size: x-large;
+}
+
+button:hover {
+    background-color: #191919;
 }

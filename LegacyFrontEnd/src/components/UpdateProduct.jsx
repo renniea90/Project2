@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import CustomAlert from './CustomAlert';
 import ProductForm from './ProductForm';
-import useFetchItems from './FetchItems';
 import axios from 'axios';
 import '../CSS/Modal.css';
 
@@ -13,7 +12,6 @@ const UpdateProduct = ({ product, onCancel, onUpdateSuccess }) => {
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(true);
-  const { items: existingProducts, error } = useFetchItems();
 
   useEffect(() => {
     setFormData({ ...product });
@@ -21,26 +19,6 @@ const UpdateProduct = ({ product, onCancel, onUpdateSuccess }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (error) {
-      setAlertMessage('Error loading existing products. Please try again later.');
-      setShowAlert(true);
-      setIsModalVisible(false); 
-      return;
-    }
-
-  
-    const productNameExists = existingProducts.some(p => 
-      p.name.toLowerCase() === formData.name.toLowerCase() && p.id !== formData.id
-    );
-    
-    if (productNameExists) {
-      setAlertMessage('Product name already exists. Please choose a different name.');
-      setShowAlert(true);
-      setIsModalVisible(false); 
-      return;
-    }
-    
 
     try {
       const response = await axios.patch(`http://localhost:8082/item/update/${formData.id}`, formData);

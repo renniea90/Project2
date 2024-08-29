@@ -1,32 +1,16 @@
 package com.legacy.demo.dtos;
 
-
 import com.legacy.demo.entities.Item;
-import jakarta.persistence.OneToMany;
-
 
 public class ItemDto {
-    @OneToMany
     private Integer id;
     private String name;
     private Double price;
     private Integer quantity;
     private String imageUrl;
 
-    public ItemDto(Integer id, String name, Double price, Integer quantity, String imageUrl) {
-        super();
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.quantity = quantity;
-        this.imageUrl  =  imageUrl ;
-    }
-    public ItemDto() {
-        super();
-    }
-
-    public ItemDto(Item item){
-         super();
+    // Constructor that takes an Item entity
+    public ItemDto(Item item) {
         this.id = item.getId();
         this.name = item.getName();
         this.price = item.getPrice();
@@ -34,6 +18,7 @@ public class ItemDto {
         this.imageUrl = item.getImageUrl();
     }
 
+    // Getters and Setters
     public Integer getId() {
         return id;
     }

@@ -1,22 +1,25 @@
 package com.legacy.demo.entities;
+
 import jakarta.persistence.*;
 
 @Entity
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Integer id;
+
     private String name;
     private Double price;
-    private Integer quantity;
+
+    // Initialize quantity to 0 to avoid null values
+    private Integer quantity = 0;
+
     private String imageUrl;
 
-    public Item(){
-    }
+    // Constructors
+    public Item() {}
 
     public Item(Integer id, String name, Double price, Integer quantity, String imageUrl) {
-        super();
         this.id = id;
         this.name = name;
         this.price = price;
@@ -24,18 +27,7 @@ public class Item {
         this.imageUrl = imageUrl;
     }
 
-    public Item(String name, Double price, String imageUrl) {
-        super();
-        this.name = name;
-        this.price = price;
-        this.imageUrl = imageUrl;
-    }
-
-    public Item(Integer id) {
-        super();
-        this.id = id;
-    }
-
+    // Getters and Setters
     public Integer getId() {
         return id;
     }
