@@ -36,14 +36,16 @@ public class CartController {
 
     @PatchMapping("/update/{cartId}")
     public ResponseEntity<?> updateCart(@PathVariable String cartId,
-                                         @RequestBody Cart updateRequest){
-        return this.cartService.updateCart(
+                                        @RequestBody Cart updateRequest){
+        return cartService.updateCart(
                 cartId,
                 updateRequest.getItems(),
                 updateRequest.getStatus()
         );
     }
 
-
-
+    @PostMapping("/checkout/{cartId}")
+    public ResponseEntity<?> checkout(@PathVariable String cartId) {
+        return cartService.checkoutCart(cartId);
+    }
 }

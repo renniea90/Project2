@@ -1,31 +1,31 @@
 package com.legacy.demo.entities;
 
 import com.legacy.demo.classes.CartItemData;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.CollectionTable;
-import jakarta.persistence.JoinColumn;
+import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+
+
 import java.util.List;
 
 @Entity
 public class Cart {
 
     @Id
-    private String cartId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String id;
 
-    @ElementCollection
-    @CollectionTable(name = "cart_items", joinColumns = @JoinColumn(name = "cart_id"))
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CartItemData> items;
+
     private String status;
 
-
-    public String getCartId() {
-        return cartId;
+    // Getters and setters
+    public String getId() {
+        return id;
     }
 
-    public void setCartId(String cartId) {
-        this.cartId = cartId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public List<CartItemData> getItems() {

@@ -1,71 +1,68 @@
 package com.legacy.demo.services;
 
-import com.legacy.demo.entities.Cart;
 import com.legacy.demo.classes.CartItemData;
+import com.legacy.demo.entities.Cart;
 import com.legacy.demo.repos.CartRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CartService {
 
-    @Autowired
-    private CartRepository cartRepository;
+    private final CartRepository cartRepository;
+    private final ItemService itemService;  // Ensure this is properly imported
 
-    private static final int ID_LENGTH = 6;
-    private static final Set<String> generatedIds = new HashSet<>(); // Track generated IDs to ensure uniqueness
-    private static final Random random = new Random();
-
-
-    @Transactional
-    public String createCartWithItems(List<CartItemData> items) {
-
-        String cartId = generateOrderId();
-
-        Cart cart = new Cart();
-        cart.setCartId(cartId);
-        cart.setItems(items);
-        cart.setStatus("in progress");
-
-        cartRepository.save(cart);
-        return cartId;
+    public CartService(CartRepository cartRepository, ItemService itemService) {
+        this.cartRepository = cartRepository;
+        this.itemService = itemService;
     }
-
 
     public List<CartItemData> getCart(String cartId) {
-        return cartRepository.findById(cartId)
-                .map(Cart::getItems)
-                .orElseThrow(() -> new RuntimeException("Cart not found"));
+        Optional<Cart> cartOptional = cartRepository.findById(cartId);
+        return cartOptional.map(Cart::getItems).orElseThrow(() -> new RuntimeException("Cart not found"));
     }
 
-    private String generateOrderId() {
-        String orderId;
-        do {
-            orderId = String.format("%06d", random.nextInt(1000000)); // Generates a 6-digit number
-        } while (generatedIds.contains(orderId)); // Ensure uniqueness
-        generatedIds.add(orderId); // Add the new ID to the set
-        return orderId;
+    public String createCartWithItems(List<CartItemData> items) {
+        Cart cart = new Cart();
+        cart.setItems(items);
+        Cart savedCart = cartRepository.save(cart);
+        return savedCart.getId();
     }
 
-    public ResponseEntity<?> updateCart(String cartId,
-                                        List<CartItemData> items,
-                                        String status){
-        Optional<Cart> found = this.cartRepository.findByCartId(cartId);
-        if (found.isEmpty()){
-            return new ResponseEntity<>("No Cart found with ID " + cartId, HttpStatus.NOT_FOUND);
+    public ResponseEntity<?> updateCart(String cartId, List<CartItemData> items, String status) {
+        Optional<Cart> cartOptional = cartRepository.findById(cartId);
+        if (cartOptional.isPresent()) {
+            Cart cart = cartOptional.get();
+            cart.setItems(items);
+            cart.setStatus(status);
+            cartRepository.save(cart);
+            return ResponseEntity.ok("Cart updated successfully");
+        } else {
+            return ResponseEntity.notFound().build();
         }
+    }
 
-        Cart toUpdate = found.get();
+    public ResponseEntity<?> checkoutCart(String cartId) {
+        Optional<Cart> cartOptional = cartRepository.findById(cartId);
+        if (cartOptional.isPresent()) {
+            Cart cart = cartOptional.get();
 
-        if (items != null) toUpdate.setItems(items);
-        if (status != null) toUpdate.setStatus(status);
+            // Reserve stock for each item in the cart
+            for (CartItemData itemData : cart.getItems()) {
+                ResponseEntity<?> response = itemService.reserveStock(itemData.getItemId(), itemData.getQuantity());
+                if (!response.getStatusCode().is2xxSuccessful()) {
+                    return ResponseEntity.badRequest().body("Checkout failed due to insufficient stock for item ID: " + itemData.getItemId());
+                }
+            }
 
-        Cart updated = this.cartRepository.save(toUpdate);
-        return ResponseEntity.ok(updated);
+            cart.setStatus("CHECKED_OUT");
+            cartRepository.save(cart);
+            return ResponseEntity.ok("Checkout complete");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
