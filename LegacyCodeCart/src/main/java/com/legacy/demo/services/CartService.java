@@ -1,23 +1,28 @@
 package com.legacy.demo.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
 import com.legacy.demo.classes.CartItemData;
 import com.legacy.demo.entities.Cart;
 import com.legacy.demo.repos.CartRepository;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
 public class CartService {
 
     private final CartRepository cartRepository;
-    private final ItemService itemService;  // Ensure this is properly imported
+    private final RestTemplate restTemplate;
 
-    public CartService(CartRepository cartRepository, ItemService itemService) {
+    @Autowired
+    public CartService(CartRepository cartRepository, RestTemplate restTemplate) {
         this.cartRepository = cartRepository;
-        this.itemService = itemService;
+        this.restTemplate = restTemplate;
     }
 
     public List<CartItemData> getCart(String cartId) {
@@ -50,9 +55,11 @@ public class CartService {
         if (cartOptional.isPresent()) {
             Cart cart = cartOptional.get();
 
-            // Reserve stock for each item in the cart
+            // Reserve stock for each item in the cart using HTTP calls to ItemService
             for (CartItemData itemData : cart.getItems()) {
-                ResponseEntity<?> response = itemService.reserveStock(itemData.getItemId(), itemData.getQuantity());
+                String itemServiceUrl = "http://item-service-url/item/reserve/" + itemData.getItemId();
+                ResponseEntity<?> response = restTemplate.postForEntity(itemServiceUrl, Map.of("quantity", itemData.getQuantity()), ResponseEntity.class);
+
                 if (!response.getStatusCode().is2xxSuccessful()) {
                     return ResponseEntity.badRequest().body("Checkout failed due to insufficient stock for item ID: " + itemData.getItemId());
                 }
