@@ -54,3 +54,10 @@ button {
 button:hover {
     background-color: #191919;
 }
+
+.cart-table img {
+    width: 100px;
+    height: auto;
+    object-fit: cover;
+  }
+  

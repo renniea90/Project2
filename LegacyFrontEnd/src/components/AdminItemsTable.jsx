@@ -6,6 +6,7 @@ const AdminItemsTable = ({ items, setItems }) => {
     name: '',
     price: '',
     quantity: '',
+    imageUrl: '', // Add imageUrl to the editable fields
   });
 
   useEffect(() => {
@@ -23,6 +24,7 @@ const AdminItemsTable = ({ items, setItems }) => {
       name: items[index].name,
       price: items[index].price,
       quantity: items[index].quantity,
+      imageUrl: items[index].imageUrl, // Populate imageUrl for editing
     });
   };
 
@@ -32,6 +34,7 @@ const AdminItemsTable = ({ items, setItems }) => {
       ...editItem,
       price: parseFloat(editItem.price),
       quantity: parseInt(editItem.quantity, 10),
+      imageUrl: editItem.imageUrl, // Save the updated imageUrl
     };
 
     saveItemToBackend(id, updatedItem);
@@ -39,7 +42,7 @@ const AdminItemsTable = ({ items, setItems }) => {
 
   const saveItemToBackend = (id, updatedItem) => {
     fetch(`http://localhost:8082/item/update/${id}`, {
-      method: 'PATCH', // Use PATCH for partial updates
+      method: 'PATCH', 
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(updatedItem),
     })
@@ -68,7 +71,7 @@ const AdminItemsTable = ({ items, setItems }) => {
         if (!response.ok) {
           throw new Error('Failed to delete item');
         }
-        return response.text(); // Assuming a plain text response for deletion
+        return response.text(); 
       })
       .then(() => {
         setItems(prevItems => prevItems.filter(item => item.id !== id));
@@ -87,6 +90,7 @@ const AdminItemsTable = ({ items, setItems }) => {
         <thead>
           <tr>
             <th>Item ID</th>
+            <th>Image</th> {/* New column for image */}
             <th>Item Name</th>
             <th>Item Price</th>
             <th>Currently In Stock</th>
@@ -95,8 +99,20 @@ const AdminItemsTable = ({ items, setItems }) => {
         </thead>
         <tbody>
           {items.map((item, index) => (
-            <tr key={item.id || index}> {/* Ensure unique key */}
+            <tr key={item.id || index}> 
               <td>{item.id}</td>
+              <td>
+                {editIndex === index ? (
+                  <input
+                    type="text"
+                    name="imageUrl"
+                    value={editItem.imageUrl}
+                    onChange={handleInputChange}
+                  />
+                ) : (
+                  <img src={item.imageUrl} alt={item.name} style={{ width: '100px', height: 'auto' }} />
+                )}
+              </td>
               <td>
                 {editIndex === index ? (
                   <input
@@ -118,7 +134,7 @@ const AdminItemsTable = ({ items, setItems }) => {
                     onChange={handleInputChange}
                   />
                 ) : (
-                  `£${item.price !== undefined ? item.price.toFixed(2) : '0.00'}` // Safeguard .toFixed
+                  `£${item.price !== undefined ? item.price.toFixed(2) : '0.00'}`
                 )}
               </td>
               <td>
@@ -130,7 +146,7 @@ const AdminItemsTable = ({ items, setItems }) => {
                     onChange={handleInputChange}
                   />
                 ) : (
-                  item.quantity !== undefined ? item.quantity : '0' // Safeguard quantity
+                  item.quantity !== undefined ? item.quantity : '0'
                 )}
               </td>
               <td>

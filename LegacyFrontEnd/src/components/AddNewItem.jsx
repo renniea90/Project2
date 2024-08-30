@@ -1,12 +1,13 @@
 import { useState } from 'react';
-import { useCart } from '../components/CartContext'; // Import the useCart hook to get access to fetchItems
+import { useCart } from '../components/CartContext'; 
 import '../CSS/AddNewItem.css';
 
 const AddNewItem = () => {
-  const { setItems, fetchItems } = useCart(); // Get fetchItems from CartContext
+  const { setItems, fetchItems } = useCart(); 
   const [name, setItemName] = useState('');
   const [price, setItemPrice] = useState('');
   const [quantity, setItemQuantity] = useState('');
+  const [imageUrl, setImageUrl] = useState(''); // New state for image URL
   const [errors, setErrors] = useState({});
 
   const validateFields = () => {
@@ -16,6 +17,7 @@ const AddNewItem = () => {
       newErrors.price = 'Valid Item Price is required';
     if (!quantity || isNaN(parseInt(quantity, 10)) || parseInt(quantity, 10) <= 0)
       newErrors.quantity = 'Valid Quantity is required';
+    if (!imageUrl) newErrors.imageUrl = 'Image URL is required';
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -28,7 +30,7 @@ const AddNewItem = () => {
       name: name,
       price: parseFloat(price),
       quantity: parseInt(quantity, 10),
-      imageUrl: '' // Assuming imageUrl is not used or is set somewhere else
+      imageUrl: imageUrl // Include imageUrl in the payload
     };
 
     saveNewItemToBackend(newItem);
@@ -44,15 +46,16 @@ const AddNewItem = () => {
       if (!response.ok) {
         throw new Error('Failed to add new item');
       }
-      return response.json();  // Ensure the new item data is returned as JSON
+      return response.json();
     })
     .then(savedItem => {
-      setItems(prevItems => [...prevItems, savedItem]); // Update items with the new item
+      setItems(prevItems => [...prevItems, savedItem]); 
       setItemName('');
       setItemPrice('');
       setItemQuantity('');
+      setImageUrl(''); 
       setErrors({});
-      fetchItems(); // Trigger a fetch to refresh the items list
+      fetchItems(); 
     })
     .catch(error => {
       console.error('Failed to add new item:', error);
@@ -94,6 +97,16 @@ const AddNewItem = () => {
         />
       </div>
       {errors.quantity && <span style={{ color: 'red' }}>{errors.quantity}</span>}
+      <div className="form-field">
+        <label>Image URL:</label> {/* New field for image URL */}
+        <input
+          type="text"
+          value={imageUrl}
+          onChange={(e) => setImageUrl(e.target.value)}
+          style={{ borderColor: errors.imageUrl ? 'red' : '' }}
+        />
+      </div>
+      {errors.imageUrl && <span style={{ color: 'red' }}>{errors.imageUrl}</span>}
       {errors.submit && <span style={{ color: 'red' }}>{errors.submit}</span>}
       <button onClick={handleAddNewItem} className="add-item-button">
         Add Item

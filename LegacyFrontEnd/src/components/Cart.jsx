@@ -5,12 +5,10 @@ import '../CSS/Cart.css';
 const Cart = () => {
   const { cartItems, updateQuantity, removeFromCart, clearCart, items, handleCheckout } = useCart();
 
-  // Calculate total price of items in cart
   const calculateTotal = () => {
     return cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
   };
 
-  // Calculate service charge (7.25%)
   const calculateServiceCharge = (total) => {
     return (total * 0.0725).toFixed(2);
   };
@@ -19,7 +17,6 @@ const Cart = () => {
   const serviceCharge = calculateServiceCharge(total);
   const grandTotal = (parseFloat(total) + parseFloat(serviceCharge)).toFixed(2);
 
-  // Increase quantity of an item
   const handleIncrease = (id) => {
     const item = cartItems.find((item) => item.id === id);
     const itemInStock = items.find((i) => i.id === id);
@@ -29,7 +26,6 @@ const Cart = () => {
     }
   };
 
-  // Decrease quantity of an item
   const handleDecrease = (id) => {
     const item = cartItems.find((item) => item.id === id);
     if (item && item.quantity > 1) {
@@ -43,6 +39,7 @@ const Cart = () => {
       <table className="cart-table">
         <thead>
           <tr>
+            <th>Image</th> {/* New column for image */}
             <th>Item</th>
             <th>Price</th>
             <th>Quantity</th>
@@ -53,6 +50,9 @@ const Cart = () => {
         <tbody>
           {cartItems.map((item) => (
             <tr key={item.id}>
+              <td>
+                <img src={item.imageUrl} alt={item.name} style={{ width: '100px', height: 'auto' }} />
+              </td>
               <td>{item.name}</td>
               <td>£{item.price.toFixed(2)}</td>
               <td>
@@ -69,17 +69,17 @@ const Cart = () => {
         </tbody>
         <tfoot>
           <tr>
-            <td colSpan="3">Subtotal</td>
+            <td colSpan="4">Subtotal</td>
             <td>£{total}</td>
             <td></td>
           </tr>
           <tr>
-            <td colSpan="3">Service Charge (7.25%)</td>
+            <td colSpan="4">Service Charge (7.25%)</td>
             <td>£{serviceCharge}</td>
             <td></td>
           </tr>
           <tr>
-            <td colSpan="3">Total</td>
+            <td colSpan="4">Total</td>
             <td>£{grandTotal}</td>
             <td></td>
           </tr>

@@ -50,3 +50,16 @@ button {
 button:hover {
   background-color: #191919;
 }
+
+th, td {
+  text-align: center;
+  padding: 8px;
+  border-bottom: 5px solid #eee;
+  vertical-align: middle; /* Ensure content aligns in the middle */
+}
+
+td img {
+  width: 100px;
+  height: auto;
+  object-fit: cover; /* Ensure images are uniform */
+}

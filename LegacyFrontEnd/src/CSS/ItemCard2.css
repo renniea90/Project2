@@ -1,0 +1,75 @@
+.item-cards-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns layout */
+    gap: 20px;
+    padding: 20px;
+    justify-content: start; /* Align the grid to the left */
+    width: 100%; /* Ensure the container takes the full width */
+    max-width: 1200px; /* Set a maximum width if needed */
+    margin: 0 auto; /* Center the grid horizontally if it’s not full-width */
+    padding-top: 100px; /* Add padding to prevent overlap with the navbar */
+    box-sizing: border-box; /* Ensure padding doesn’t affect the width */
+}
+
+.item-card {
+    width: 100%; /* Card width will adjust according to grid */
+    border: 1px solid #ddd;
+    overflow: hidden;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.item-image {
+    width: 100%;
+    height: auto; /* Allow image to maintain its aspect ratio */
+    object-fit: contain; /* Ensure the whole image is visible */
+    margin: 0;
+}
+
+.item-card-content {
+    padding: 20px;
+    background-color: white;
+    text-align: center;
+}
+
+.item-card-content h3 {
+    margin: 0 0 10px 0;
+    font-size: large;
+    font-family: 'Wix Madefor Display', Helvetica, sans-serif;
+}
+
+.item-card-content p {
+    margin: 4px 0;
+    font-size: large;
+    font-family: 'Wix Madefor Display', Helvetica, sans-serif;
+}
+
+.add-to-cart-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: large;
+    cursor: pointer;
+    margin-top: 20px;
+    align-self: center;
+}
+
+.add-to-cart-button:hover {
+    background-color: #45a049;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .item-cards-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .item-cards-container {
+        grid-template-columns: 1fr; /* 1 column on small screens */
+    }
+}
