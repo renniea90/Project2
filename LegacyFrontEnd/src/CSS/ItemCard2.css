@@ -5,15 +5,14 @@
     padding: 20px;
     justify-content: start; /* Align the grid to the left */
     width: 100%; /* Ensure the container takes the full width */
-    max-width: 1200px; /* Set a maximum width if needed */
     margin: 0 auto; /* Center the grid horizontally if it’s not full-width */
-    padding-top: 100px; /* Add padding to prevent overlap with the navbar */
+    padding-top: 180px; /* Add padding to prevent overlap with the navbar */
     box-sizing: border-box; /* Ensure padding doesn’t affect the width */
 }
 
 .item-card {
     width: 100%; /* Card width will adjust according to grid */
-    border: 1px solid #ddd;
+    
     overflow: hidden;
     background-color: #fff;
     display: flex;
@@ -36,13 +35,13 @@
 
 .item-card-content h3 {
     margin: 0 0 10px 0;
-    font-size: large;
+    font-size: xx-large;
     font-family: 'Wix Madefor Display', Helvetica, sans-serif;
 }
 
 .item-card-content p {
     margin: 4px 0;
-    font-size: large;
+    font-size: x-large;
     font-family: 'Wix Madefor Display', Helvetica, sans-serif;
 }
 
@@ -51,7 +50,7 @@
     color: white;
     border: none;
     padding: 10px 20px;
-    font-size: large;
+    font-size: x-large;
     cursor: pointer;
     margin-top: 20px;
     align-self: center;

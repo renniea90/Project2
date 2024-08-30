@@ -56,9 +56,9 @@ const Cart = () => {
               <td>{item.name}</td>
               <td>£{item.price.toFixed(2)}</td>
               <td>
-                <button onClick={() => handleDecrease(item.id)}>-</button>
+                <button className="minusButton" onClick={() => handleDecrease(item.id)}>-</button>
                 <span className="quantity">{item.quantity}</span>
-                <button onClick={() => handleIncrease(item.id)}>+</button>
+                <button className="minusButton" onClick={() => handleIncrease(item.id)}>+</button>
               </td>
               <td>£{(item.price * item.quantity).toFixed(2)}</td>
               <td>

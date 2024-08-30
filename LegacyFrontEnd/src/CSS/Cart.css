@@ -1,15 +1,14 @@
 .cart-container, .cart-component {
     position: fixed;
-    right: 0;
-    top: 120px;
+    right: 20px;
+    top: 180px;
     width: 25%;
-    margin: 0;
+    margin: 20px;
     padding: 20px;
     box-sizing: border-box;
     background-color: #ffffff;
     overflow-y: auto;
     z-index: 1000;
-    border-left: 1px solid #ddd;
 }
 
 .cart-component h2 {
@@ -42,8 +41,9 @@ tfoot td {
 }
 
 button {
-    background-color: #4a4a4a;
-    color: white;
+
+    background-color: white;
+    color: #4a4a4a;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
@@ -55,9 +55,14 @@ button:hover {
     background-color: #191919;
 }
 
-.cart-table img {
-    width: 100px;
-    height: auto;
-    object-fit: cover;
-  }
-  
+.minusButton {
+
+    background-color: #4a4a4a;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 0;
+    font-size: x-large;
+
+}
