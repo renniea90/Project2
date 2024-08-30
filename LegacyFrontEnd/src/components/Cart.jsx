@@ -1,4 +1,3 @@
-import React from 'react';
 import { useCart } from './CartContext';  
 import '../CSS/Cart.css';  
 
@@ -70,7 +69,7 @@ const Cart = () => {
         <tfoot>
           <tr>
             <td colSpan="4">Subtotal</td>
-            <td>£{total}</td>
+            <td>£{total.toFixed(2)}</td> {/* Ensure two decimal places */}
             <td></td>
           </tr>
           <tr>
