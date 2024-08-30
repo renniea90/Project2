@@ -1,6 +1,6 @@
 import React from 'react';
 import ItemCard2 from '../components/ItemCard2';
-import CartComponent from '../components/CartComponent';
+import Cart from '../components/Cart';
 import '../CSS/ShopPage.css';
 import { useCart } from '../components/CartContext';
 
@@ -10,7 +10,7 @@ const ShopPage = () => {
     return (
         <div className="main-container">
             <div className="cart-container card">
-                <CartComponent cart={cartItems} />
+                <Cart cart={cartItems} />
             </div>
 
             <div className="card">

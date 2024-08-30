@@ -1,13 +1,7 @@
 import React, { useState } from 'react';
-import axios from 'axios'; 
-// import AddProduct from '../components/AddProduct';
 import AddNewItem from '../components/AddNewItem';
-import UpdateProduct from '../components/UpdateProduct';
-// import ProductListTable from '../components/ProductListTable';
 import AdminItemsTable from '../components/AdminItemsTable';
-import DeleteProduct from '../components/DeleteProduct'; 
 import '../CSS/AdminPage.css'; 
-import '../CSS/Modal.css';
 import { useCart } from '../components/CartContext';
 
 const AdminPage = () => {

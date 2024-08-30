@@ -1,31 +1,39 @@
 package com.legacy.demo.entities;
 
 import com.legacy.demo.classes.CartItemData;
-import jakarta.persistence.*;
-import org.springframework.data.annotation.Id;
-
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.CascadeType;
 
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 public class Cart {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private String cartId;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CartItemData> items;
 
     private String status;
 
-    // Getters and setters
-    public String getId() {
-        return id;
+    // Constructor to automatically generate a UUID for cartId
+    public Cart() {
+        this.cartId = UUID.randomUUID().toString();
     }
 
-    public void setId(String id) {
-        this.id = id;
+    // Getters and setters
+    public String getCartId() {
+        return cartId;
+    }
+
+    public void setCartId(String cartId) {
+        this.cartId = cartId;
     }
 
     public List<CartItemData> getItems() {

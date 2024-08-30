@@ -25,20 +25,20 @@ public class CartService {
         this.restTemplate = restTemplate;
     }
 
-    public List<CartItemData> getCart(String cartId) {
-        Optional<Cart> cartOptional = cartRepository.findById(cartId);
+    public List<CartItemData> getCart(String cartId) {  // Use String here
+        Optional<Cart> cartOptional = cartRepository.findByCartId(cartId);
         return cartOptional.map(Cart::getItems).orElseThrow(() -> new RuntimeException("Cart not found"));
     }
 
-    public String createCartWithItems(List<CartItemData> items) {
+    public String createCartWithItems(List<CartItemData> items) {  // Use String here
         Cart cart = new Cart();
         cart.setItems(items);
         Cart savedCart = cartRepository.save(cart);
-        return savedCart.getId();
+        return savedCart.getCartId();
     }
 
-    public ResponseEntity<?> updateCart(String cartId, List<CartItemData> items, String status) {
-        Optional<Cart> cartOptional = cartRepository.findById(cartId);
+    public ResponseEntity<?> updateCart(String cartId, List<CartItemData> items, String status) {  // Use String here
+        Optional<Cart> cartOptional = cartRepository.findByCartId(cartId);
         if (cartOptional.isPresent()) {
             Cart cart = cartOptional.get();
             cart.setItems(items);
@@ -50,18 +50,18 @@ public class CartService {
         }
     }
 
-    public ResponseEntity<?> checkoutCart(String cartId) {
-        Optional<Cart> cartOptional = cartRepository.findById(cartId);
+    public ResponseEntity<?> checkoutCart(String cartId) {  // Use String here
+        Optional<Cart> cartOptional = cartRepository.findByCartId(cartId);
         if (cartOptional.isPresent()) {
             Cart cart = cartOptional.get();
 
             // Reserve stock for each item in the cart using HTTP calls to ItemService
             for (CartItemData itemData : cart.getItems()) {
-                String itemServiceUrl = "http://item-service-url/item/reserve/" + itemData.getItemId();
+                String itemServiceUrl = "http://item-service-url/item/reserve/" + itemData.getId();
                 ResponseEntity<?> response = restTemplate.postForEntity(itemServiceUrl, Map.of("quantity", itemData.getQuantity()), ResponseEntity.class);
 
                 if (!response.getStatusCode().is2xxSuccessful()) {
-                    return ResponseEntity.badRequest().body("Checkout failed due to insufficient stock for item ID: " + itemData.getItemId());
+                    return ResponseEntity.badRequest().body("Checkout failed due to insufficient stock for item ID: " + itemData.getId());
                 }
             }
 
