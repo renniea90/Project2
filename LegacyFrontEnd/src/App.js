@@ -11,7 +11,7 @@ function App() {
         <CartProvider>
           <Navbar />
           <Routes>
-            <Route path="/shop" element={<ShopPage />} />
+            <Route path="/" element={<ShopPage />} />
             <Route path="/admin" element={<AdminPage />} />
           </Routes>
         </CartProvider>

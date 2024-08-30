@@ -27,6 +27,6 @@ input[type="text"], input[type="number"] {
     border-radius: 0px;
     font-size: x-large;
     font-family: 'Wix Madefor Display', Helvetica, sans-serif;
-    width: 925px; /* Adjust width to fit within the card */
+    width: 100%; /* Adjust width to fit within the card */
     
 }

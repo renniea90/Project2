@@ -26,7 +26,7 @@ table {
 th, td {
     border-bottom: 5px solid #eee;
     padding: 8px;
-    text-align: center;
+    text-align: left;
 }
 
 tfoot td {
@@ -55,14 +55,3 @@ button:hover {
     background-color: #191919;
 }
 
-.minusButton {
-
-    background-color: #4a4a4a;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 0;
-    font-size: x-large;
-
-}
