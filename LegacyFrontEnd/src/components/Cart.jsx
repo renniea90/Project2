@@ -1,8 +1,9 @@
 import React from 'react';
 import { useCart } from './CartContext';  
 import '../CSS/Cart.css';  
+
 const Cart = () => {
-  const { cartItems, updateQuantity, removeFromCart, clearCart } = useCart(); // Use necessary cart context methods
+  const { cartItems, updateQuantity, removeFromCart, clearCart, items, handleCheckout } = useCart();
 
   // Calculate total price of items in cart
   const calculateTotal = () => {
@@ -17,6 +18,24 @@ const Cart = () => {
   const total = parseFloat(calculateTotal());
   const serviceCharge = calculateServiceCharge(total);
   const grandTotal = (parseFloat(total) + parseFloat(serviceCharge)).toFixed(2);
+
+  // Increase quantity of an item
+  const handleIncrease = (id) => {
+    const item = cartItems.find((item) => item.id === id);
+    const itemInStock = items.find((i) => i.id === id);
+
+    if (item && itemInStock && item.quantity < itemInStock.quantity) {
+      updateQuantity(id, item.quantity + 1);
+    }
+  };
+
+  // Decrease quantity of an item
+  const handleDecrease = (id) => {
+    const item = cartItems.find((item) => item.id === id);
+    if (item && item.quantity > 1) {
+      updateQuantity(id, item.quantity - 1);
+    }
+  };
 
   return (
     <div className="cart-component">
@@ -37,14 +56,9 @@ const Cart = () => {
               <td>{item.name}</td>
               <td>£{item.price.toFixed(2)}</td>
               <td>
-                <select
-                  value={item.quantity}
-                  onChange={(e) => updateQuantity(item.id, parseInt(e.target.value))}
-                >
-                  {Array.from({ length: item.quantity + 10 }, (_, i) => i + 1).map((num) => (
-                    <option key={num} value={num}>{num}</option>
-                  ))}
-                </select>
+                <button onClick={() => handleDecrease(item.id)}>-</button>
+                <span className="quantity">{item.quantity}</span>
+                <button onClick={() => handleIncrease(item.id)}>+</button>
               </td>
               <td>£{(item.price * item.quantity).toFixed(2)}</td>
               <td>
@@ -73,7 +87,7 @@ const Cart = () => {
       </table>
       <div className="cart-actions">
         <button onClick={clearCart} className="clear-cart-btn">Clear Cart</button>
-        <button onClick={() => alert('Proceeding to Checkout')} className="checkout-btn">Checkout</button>
+        <button onClick={handleCheckout} className="checkout-btn">Checkout</button>
       </div>
     </div>
   );
