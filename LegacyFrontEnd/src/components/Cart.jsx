@@ -1,3 +1,5 @@
+import StripeCheckout from 'react-stripe-checkout';
+import axios from 'axios';
 import { useCart } from './CartContext';  
 import '../CSS/Cart.css';  
 
@@ -29,6 +31,25 @@ const Cart = () => {
     const item = cartItems.find((item) => item.id === id);
     if (item && item.quantity > 1) {
       updateQuantity(id, item.quantity - 1);
+    }
+  };
+
+  const handleToken = async (token) => {
+    try {
+      const response = await axios.post('http://localhost:8084/api/payment/charge', null, {
+        headers: {
+          token: token.id,
+          amount: grandTotal * 100, // Stripe works with cents, so multiply the total by 100
+        },
+      });
+      console.log(response);
+      if (response.status === 200) {
+        alert('Payment Successful!');
+        handleCheckout(); // Call your existing checkout logic
+      }
+    } catch (error) {
+      console.error('Payment failed:', error);
+      alert('Payment failed. Please try again.');
     }
   };
 
@@ -86,7 +107,17 @@ const Cart = () => {
       </table>
       <div className="cart-actions">
         <button onClick={clearCart} className="clear-cart-btn">Clear Cart</button>
-        <button onClick={handleCheckout} className="checkout-btn">Checkout</button>
+        <StripeCheckout
+          stripeKey="pk_test_51PuYbP1u1GNBLV0cpcFYmhDa2G8m5MtRd4V221Ww9LDWOkJMKQKIQ7t8kf4BO6RErEI6r5ka6LDK3QQgyA4abVVG00lrEBdXzP" // Replace with your actual Stripe publishable key
+          token={handleToken}
+          amount={grandTotal * 100} // amount in cents
+          currency="GBP"
+          name="Your Shop Name"
+          billingAddress
+          shippingAddress
+        >
+          <button className="checkout-btn">Checkout</button>
+        </StripeCheckout>
       </div>
     </div>
   );

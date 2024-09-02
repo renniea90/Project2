@@ -1,2 +1,25 @@
-package com.stripe.stripe_payment.controller;public class PaymentGatewayController {
+package com.stripe.stripe_payment.controller;
+
+import com.stripe.stripe_payment.client.StripeClient;
+import com.stripe.model.Charge;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@CrossOrigin("*")
+@RequestMapping("/api/payment")
+public class PaymentGatewayController {
+
+    private final StripeClient stripeClient;
+
+    @Autowired
+    public PaymentGatewayController(StripeClient stripeClient) {
+        this.stripeClient = stripeClient;
+    }
+
+    @PostMapping("/charge")
+    public Charge chargeCard(@RequestHeader(value = "token") String token,
+                             @RequestHeader(value = "amount") Double amount) throws Exception {
+        return this.stripeClient.chargeNewCard(token, amount);
+    }
 }
