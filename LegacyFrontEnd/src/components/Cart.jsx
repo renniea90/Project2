@@ -87,6 +87,8 @@ const Cart = () => {
       <div className="cart-actions">
         <button onClick={clearCart} className="clear-cart-btn">Clear Cart</button>
         <button onClick={handleCheckout} className="checkout-btn">Checkout</button>
+        <button onClick={clearCart} className="clear-cart-btn">Save Cart</button>
+        <button onClick={handleCheckout} className="checkout-btn">Retrieve Cart</button>
       </div>
     </div>
   );
