@@ -1,7 +1,8 @@
-import StripeCheckout from 'react-stripe-checkout';
+import React from 'react';
+import { useCart } from './CartContext';
+import StripeCheckout from 'react-stripe-checkout'; // Import StripeCheckout correctly
+import '../CSS/Cart.css';
 import axios from 'axios';
-import { useCart } from './CartContext';  
-import '../CSS/Cart.css';  
 
 const Cart = () => {
   const { cartItems, updateQuantity, removeFromCart, clearCart, items, handleCheckout } = useCart();
@@ -36,22 +37,22 @@ const Cart = () => {
 
   const handleToken = async (token) => {
     try {
-      const response = await axios.post('http://localhost:8084/api/payment/charge', null, {
-        headers: {
-          token: token.id,
-          amount: grandTotal * 100, // Stripe works with cents, so multiply the total by 100
-        },
-      });
-      console.log(response);
-      if (response.status === 200) {
-        alert('Payment Successful!');
-        handleCheckout(); // Call your existing checkout logic
-      }
+        const response = await axios.post('http://localhost:8084/api/payment/charge', null, {
+            headers: {
+                token: "tok_visa", // Using the Stripe test token
+                amount: grandTotal * 100, // Convert amount to the smallest unit (pence for GBP)
+            },
+        });
+        console.log(response);
+        if (response.status === 200) {
+            alert('Payment Successful!');
+            handleCheckout(); // Proceed with checkout logic
+        }
     } catch (error) {
-      console.error('Payment failed:', error);
-      alert('Payment failed. Please try again.');
+        console.error('Payment failed:', error);
+        alert('Payment failed. Please try again.');
     }
-  };
+};
 
   return (
     <div className="cart-component">
