@@ -50,7 +50,7 @@ public class ItemService {
             item.setQuantity(quantity);
             item.setImageUrl(imageUrl);
             repo.save(item);
-            return ResponseEntity.ok("Item updated successfully");
+            return ResponseEntity.ok(item);
         } else {
             return ResponseEntity.notFound().build();
         }
