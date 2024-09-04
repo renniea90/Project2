@@ -43,3 +43,5 @@ public class PaymentGatewayController {
         }
     }
 }
+
+//PaymentGatewayController: Exposes an API endpoint (/api/payment/charge) that allows the frontend to charge a card via Stripe. It also uses Kafka to send payment status updates.

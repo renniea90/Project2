@@ -12,3 +12,5 @@ public class PaymentStatusConsumer {
         // Add logic to save to the database or handle payment status
     }
 }
+
+//PaymentStatusConsumer & PaymentStatusProducer: These are Kafka services that listen for or send messages about the payment status. The producer sends updates, and the consumer processes messages received from the "payment-status" topic.

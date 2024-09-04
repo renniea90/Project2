@@ -32,3 +32,5 @@ public class StripeClient {
         return Charge.create(chargeParams);
     }
 }
+
+//StripeClient: Handles payment interactions with Stripe. It creates customers and charges credit cards via Stripe's API.

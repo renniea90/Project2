@@ -16,3 +16,5 @@ public class PaymentStatusProducer {
         kafkaTemplate.send(TOPIC, message);
     }
 }
+
+//PaymentStatusConsumer & PaymentStatusProducer: These are Kafka services that listen for or send messages about the payment status. The producer sends updates, and the consumer processes messages received from the "payment-status" topic.

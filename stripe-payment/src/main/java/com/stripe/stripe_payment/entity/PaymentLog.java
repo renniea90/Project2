@@ -1,6 +1,6 @@
 package com.stripe.stripe_payment.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -89,3 +89,5 @@ public class PaymentLog {
         this.timestamp = timestamp;
     }
 }
+
+//PaymentLog entity: Represents a payment log in the database. The entity contains information like order ID, payment status, amount, and timestamp, and is mapped to the payment_logs table in MySQL.
