@@ -90,7 +90,7 @@ const AdminItemsTable = ({ items, setItems }) => {
         <thead>
           <tr>
             <th>Item ID</th>
-            <th>Image</th> {/* New column for image */}
+            <th>Image</th>
             <th>Item Name</th>
             <th>Item Price</th>
             <th>Currently In Stock</th>
@@ -99,7 +99,7 @@ const AdminItemsTable = ({ items, setItems }) => {
         </thead>
         <tbody>
           {items.map((item, index) => (
-            <tr key={item.id || index}> 
+            <tr key={item.id || index}>
               <td>{item.id}</td>
               <td>
                 {editIndex === index ? (
