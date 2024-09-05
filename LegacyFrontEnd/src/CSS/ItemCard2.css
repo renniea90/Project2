@@ -3,16 +3,27 @@
     grid-template-columns: repeat(3, 1fr); /* 3 columns layout */
     gap: 20px;
     padding: 20px;
-    justify-content: start; /* Align the grid to the left */
-    width: 100%; /* Ensure the container takes the full width */
-    margin: 0 auto; /* Center the grid horizontally if it’s not full-width */
+    padding-right: 400px;
+    justify-content: left; /* Align the grid items to the left */
+    width: auto; /* Adjust the width to fit content */
     padding-top: 180px; /* Add padding to prevent overlap with the navbar */
     box-sizing: border-box; /* Ensure padding doesn’t affect the width */
+    margin-left: 0; /* Move the container to the left */
+}
+
+.item-cards-container.adjust-left {
+    margin-left: 0px; /* Reset to zero or adjust this value to move further left */
+}
+
+/* Adjust margin-left to move the container further left or right */
+@media (min-width: 1024px) {
+    .item-cards-container {
+        margin-left: 0px; /* Remove any positive margin to align left */
+    }
 }
 
 .item-card {
     width: 100%; /* Card width will adjust according to grid */
-    
     overflow: hidden;
     background-color: #fff;
     display: flex;
@@ -64,11 +75,13 @@
 @media (max-width: 1024px) {
     .item-cards-container {
         grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
+        margin-left: 0; /* Keep the container left-aligned */
     }
 }
 
 @media (max-width: 768px) {
     .item-cards-container {
         grid-template-columns: 1fr; /* 1 column on small screens */
+        margin-left: 0; /* Keep the container left-aligned */
     }
 }
