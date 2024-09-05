@@ -3,7 +3,7 @@
     grid-template-columns: repeat(3, 1fr); /* 3 columns layout */
     gap: 20px;
     padding: 20px;
-    padding-right: 400px;
+    padding-right: 700px;
     justify-content: left; /* Align the grid items to the left */
     width: auto; /* Adjust the width to fit content */
     padding-top: 180px; /* Add padding to prevent overlap with the navbar */
