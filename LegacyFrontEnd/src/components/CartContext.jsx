@@ -72,7 +72,7 @@ export const CartProvider = ({ children }) => {
             clearCart();
             alert('Checkout successful!');
         } catch (error) {
-            alert('Checkout failed. Please try again later.');
+            alert('Checkout failed. We will be in touch shortly.');
         }
     }, [cartItems, clearCart]);
 

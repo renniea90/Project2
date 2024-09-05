@@ -40,12 +40,12 @@ const Cart = () => {
         const response = await axios.post('http://localhost:8084/api/payment/charge', null, {
             headers: {
                 token: "tok_visa", // Using the Stripe test token
-                amount: grandTotal * 100, // Convert amount to the smallest unit (pence for GBP)
+                amount: grandTotal, // Convert amount to the smallest unit (pence for GBP)
             },
         });
         console.log(response);
         if (response.status === 200) {
-            alert('Payment Successful!');
+            alert('Payment sjdfkasdfk!');
             handleCheckout(); // Proceed with checkout logic
         }
     } catch (error) {
@@ -60,7 +60,7 @@ const Cart = () => {
       <table className="cart-table">
         <thead>
           <tr>
-            <th>Image</th> {/* New column for image */}
+          <th>Image</th>
             <th>Item</th>
             <th>Price</th>
             <th>Quantity</th>
@@ -83,7 +83,7 @@ const Cart = () => {
               </td>
               <td>£{(item.price * item.quantity).toFixed(2)}</td>
               <td>
-                <button onClick={() => removeFromCart(item.id)}>Remove</button>
+                <button onClick={() => removeFromCart(item.id)}><i>Remove</i></button>
               </td>
             </tr>
           ))}
