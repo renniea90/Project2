@@ -1,12 +1,16 @@
+
+
+import useStore from '../store/store';
 import React from 'react';
 import { useCart } from './CartContext';
 import StripeCheckout from 'react-stripe-checkout'; // Import StripeCheckout correctly
 import '../CSS/Cart.css';
 import axios from 'axios';
 
+
 const Cart = () => {
   const { cartItems, updateQuantity, removeFromCart, clearCart, items, handleCheckout } = useCart();
-
+  const email = useStore((state) => state.email);
   const calculateTotal = () => {
     return cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
   };
@@ -56,7 +60,7 @@ const Cart = () => {
 
   return (
     <div className="cart-component">
-      <h2>Your Cart</h2>
+      <h2>{email ? `${email}'s Cart` : 'Your Cart'}</h2>
       <table className="cart-table">
         <thead>
           <tr>
