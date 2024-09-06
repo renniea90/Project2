@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
 import AddNewItem from '../components/AddNewItem';
 import AdminItemsTable from '../components/AdminItemsTable';
 import '../CSS/AdminPage.css'; 
 import { useCart } from '../components/CartContext';
 import useStore from '../store/store';
+import PaymentLogsTable from '../components/PaymentLogsTable';
 
 const AdminPage = () => {
     const { items, setItems } = useCart();  // setItems from CartContext
@@ -18,19 +18,21 @@ const AdminPage = () => {
     console.log('ADMIN PAGE Render - IsAuthenticated:', isAuthenticated);
     console.log('ADMIN PAGE Render - IsAdmin:', isAdmin);
 
-    return (
-        <div>
-            <div className="container2">
-           
-                <AddNewItem items={items} setItems={setItems} />
-            </div>
-            <div className="table-wrapper">
-                <AdminItemsTable items={items} setItems={setItems} />
+   
+  return (
+    <div>
+      <div className="container2">
+        <AddNewItem items={items} setItems={setItems} />
+      </div>
+      <div className="table-wrapper">
+        <AdminItemsTable items={items} setItems={setItems} />
+      </div>
+      <div className="table-wrapper">
+        <PaymentLogsTable />
+      </div>
+    </div>
+  );
 
-                
-            </div>
-        </div>
-    );
 };
 
 export default AdminPage;

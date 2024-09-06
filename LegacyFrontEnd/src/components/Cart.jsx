@@ -1,6 +1,12 @@
-import { useCart } from './CartContext';  
-import '../CSS/Cart.css';  
+
+
 import useStore from '../store/store';
+import React from 'react';
+import { useCart } from './CartContext';
+import StripeCheckout from 'react-stripe-checkout'; // Import StripeCheckout correctly
+import '../CSS/Cart.css';
+import axios from 'axios';
+
 
 const Cart = () => {
   const { cartItems, updateQuantity, removeFromCart, clearCart, items, handleCheckout } = useCart();
@@ -33,13 +39,32 @@ const Cart = () => {
     }
   };
 
+  const handleToken = async (token) => {
+    try {
+        const response = await axios.post('http://localhost:8084/api/payment/charge', null, {
+            headers: {
+                token: "tok_visa", // Using the Stripe test token
+                amount: grandTotal, 
+            },
+        });
+        console.log(response);
+        if (response.status === 200) {
+            alert('Payment sjdfkasdfk!');
+            handleCheckout(); // Proceed with checkout logic
+        }
+    } catch (error) {
+        console.error('Payment failed:', error);
+        alert('Payment failed. Please try again.');
+    }
+};
+
   return (
     <div className="cart-component">
       <h2>{email ? `${email}'s Cart` : 'Your Cart'}</h2>
       <table className="cart-table">
         <thead>
           <tr>
-            <th>Image</th> {/* New column for image */}
+          <th>Image</th>
             <th>Item</th>
             <th>Price</th>
             <th>Quantity</th>
@@ -62,7 +87,7 @@ const Cart = () => {
               </td>
               <td>£{(item.price * item.quantity).toFixed(2)}</td>
               <td>
-                <button onClick={() => removeFromCart(item.id)}>Remove</button>
+                <button onClick={() => removeFromCart(item.id)}><i>Remove</i></button>
               </td>
             </tr>
           ))}
@@ -87,9 +112,17 @@ const Cart = () => {
       </table>
       <div className="cart-actions">
         <button onClick={clearCart} className="clear-cart-btn">Clear Cart</button>
-        <button onClick={handleCheckout} className="checkout-btn">Checkout</button>
-        <button onClick={clearCart} className="clear-cart-btn">Save Cart</button>
-        <button onClick={handleCheckout} className="checkout-btn">Retrieve Cart</button>
+        <StripeCheckout
+          stripeKey="pk_test_51PuYbP1u1GNBLV0cpcFYmhDa2G8m5MtRd4V221Ww9LDWOkJMKQKIQ7t8kf4BO6RErEI6r5ka6LDK3QQgyA4abVVG00lrEBdXzP" // Replace with your actual Stripe publishable key
+          token={handleToken}
+          amount={grandTotal * 100} // amount in cents
+          currency="GBP"
+          name="Your Shop Name"
+          billingAddress
+          shippingAddress
+        >
+          <button className="checkout-btn">Checkout</button>
+        </StripeCheckout>
       </div>
     </div>
   );
