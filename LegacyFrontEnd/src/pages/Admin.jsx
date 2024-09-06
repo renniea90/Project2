@@ -2,11 +2,23 @@ import AddNewItem from '../components/AddNewItem';
 import AdminItemsTable from '../components/AdminItemsTable';
 import '../CSS/AdminPage.css'; 
 import { useCart } from '../components/CartContext';
+import useStore from '../store/store';
 import PaymentLogsTable from '../components/PaymentLogsTable';
 
 const AdminPage = () => {
-  const { items, setItems } = useCart();
+    const { items, setItems } = useCart();  // setItems from CartContext
+    // const setIsAuthenticated = useStore((state) => state.setIsAuthenticated);
+    // const setIsAdmin = useStore((state) => state.setIsAdmin);
+    // const setEmailStore = useStore((state) => state.setEmail);
+    const isAuthenticated = useStore((state) => state.isAuthenticated);
+    const isAdmin = useStore((state) => state.isAdmin);
+    const email = useStore((state) => state.email);
+  
+    console.log('ADMIN PAGE Render - Email:', email);
+    console.log('ADMIN PAGE Render - IsAuthenticated:', isAuthenticated);
+    console.log('ADMIN PAGE Render - IsAdmin:', isAdmin);
 
+   
   return (
     <div>
       <div className="container2">
@@ -20,6 +32,7 @@ const AdminPage = () => {
       </div>
     </div>
   );
+
 };
 
 export default AdminPage;
