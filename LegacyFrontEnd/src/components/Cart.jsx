@@ -1,9 +1,10 @@
 import { useCart } from './CartContext';  
 import '../CSS/Cart.css';  
+import useStore from '../store/store';
 
 const Cart = () => {
   const { cartItems, updateQuantity, removeFromCart, clearCart, items, handleCheckout } = useCart();
-
+  const email = useStore((state) => state.email);
   const calculateTotal = () => {
     return cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
   };
@@ -34,7 +35,7 @@ const Cart = () => {
 
   return (
     <div className="cart-component">
-      <h2>Your Cart</h2>
+      <h2>{email ? `${email}'s Cart` : 'Your Cart'}</h2>
       <table className="cart-table">
         <thead>
           <tr>

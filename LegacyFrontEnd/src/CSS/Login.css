@@ -1,0 +1,67 @@
+body {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Full viewport height */
+    margin: 0; /* Remove default margin */
+    background-color: #f0f0f0; /* Optional: Light background color for contrast */
+  }
+  
+  .auth-container {
+    max-width: 600px; /* Increased width for the form */
+    width: 100%; /* Ensure it scales with screen size */
+    padding: 80px; /* Increased padding for more space */
+    border: 1px solid #ccc;
+    border-radius: 8px; /* Slightly larger border-radius for a rounded look */
+    background-color: #fff; /* Background color for the form */
+  }
+  
+  h2 {
+    margin-top: 0;
+    font-size: 24px; /* Adjusted font size for the title */
+  }
+  
+  .form-group {
+    margin-bottom: 20px; /* Increased margin for spacing */
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+  }
+  
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 12px; /* Increased padding for larger input fields */
+    border: 1px solid #ccc;
+    border-radius: 4px; /* Adjusted border-radius for input fields */
+  }
+  
+  button {
+    display: block;
+    width: 100%;
+    padding: 12px; /* Increased padding for the button */
+    background-color: black;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: grey;
+  }
+  
+  @media only screen and (max-width: 600px) {
+    .auth-container {
+      padding: 20px; /* Adjust padding for smaller screens */
+    }
+  
+    input[type="email"],
+    input[type="password"],
+    button {
+      padding: 12px; /* Consistent padding on smaller screens */
+    }
+  }
