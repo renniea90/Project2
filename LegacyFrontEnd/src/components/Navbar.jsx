@@ -1,6 +1,6 @@
 import '../CSS/Navbar.css'; // Ensure you create this CSS file in the appropriate location
 import useStore from '../store/store';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -30,11 +30,11 @@ const Navbar = () => {
       <div className="navbar-container">
         <h1>SAHARA</h1>
         <div className="navbar-links">
-          <a href="/">HOME</a>
+          <Link to="/">HOME</Link>
           {isAuthenticated ? (
             <div className="navbar-right">
               {isAdmin && (
-                <a href="/admin">ADMIN</a>
+                <Link to="/admin">ADMIN</Link>
               )}
               <span>Welcome, {email}</span>
               <a
@@ -49,9 +49,9 @@ const Navbar = () => {
             </div>
           ) : (
             <div className="navbar-right">
-              <a href="/login">
-                <i className="fas fa-sign-in-alt"></i> LOGIN
-              </a>
+             <Link to="/login">
+             <i className="fas fa-sign-in-alt"> Login</i>
+             </Link>
             </div>
           )}
         </div>

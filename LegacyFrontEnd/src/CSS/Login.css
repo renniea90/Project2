@@ -1,11 +1,4 @@
-body {
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    height: 100vh; /* Full viewport height */
-    margin: 0; /* Remove default margin */
-    background-color: #f0f0f0; /* Optional: Light background color for contrast */
-  }
+
   
   .auth-container {
     max-width: 600px; /* Increased width for the form */

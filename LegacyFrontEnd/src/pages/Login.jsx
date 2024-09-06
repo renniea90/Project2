@@ -53,6 +53,8 @@ function LoginPage() {
 
   return (
     <div>
+    <div classname="create-space">
+    </div>
       {!isAuthenticated ? (
         <div className="auth-container">
           <h2>Login</h2>
@@ -82,6 +84,7 @@ function LoginPage() {
       ) : (
         <ShopPage />
       )}
+    
     </div>
   );
 }

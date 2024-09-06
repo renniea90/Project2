@@ -8,61 +8,46 @@
   z-index: 1000;
   padding: 10px 0; /* Adjust padding to control the height */
   display: flex;
-  justify-content: center; /* Center the navbar contents */
+  justify-content: center; /* Center the entire navbar content */
   align-items: center;
 }
-
+ 
 .navbar-container {
   display: flex;
-  justify-content: space-between; /* Space between title and links */
+  justify-content: center; /* Center the container content */
   align-items: center;
-  width: 100%;
-  max-width: 1200px; /* Optional: To control the maximum width of the container */
-  margin: 0 auto; /* Center the container within the navbar */
 }
-
+ 
 .navbar h1 {
   margin: 0;
-  font-size: 30px; /* Adjust font size as needed */
+  font-size: 130px; /* Adjusted to fit better */
   font-family: 'Wix Madefor Display', Helvetica, sans-serif;
-  flex-shrink: 0; /* Prevent shrinking of the title */
+  margin-right: 20px; /* Space between the title and links */
+  flex-shrink: 0; /* Prevent h1 from shrinking */
 }
-
+ 
 .navbar-links {
   display: flex;
   align-items: center;
-  margin-left: auto; /* Push the links to the right side */
+  margin-left: auto;
 }
-
+ 
 .navbar-links a {
   margin-left: 25px;
   text-decoration: none;
   color: #333;
-  font-size: 20px; /* Adjust font size as needed */
-  font-weight: bold;
+  font-size: 37px;
+  font-weight: bolder;
   font-family: 'Wix Madefor Display', Helvetica, sans-serif;
 }
-
+ 
 .navbar-links a:hover {
   text-decoration: underline;
 }
-
-.navbar-right {
-  display: flex;
-  align-items: center;
-}
-
-.navbar-right span {
-  margin-left: 40px; /* Adjust margin to increase space */
-  font-size: 16px; /* Adjust font size as needed */
-}
-
-.navbar-right li {
-  margin-left: 20px;
-  list-style: none; /* Remove default list styling */
-}
-
-/* Adjust body padding to match navbar height */
+ 
+/* Adjust positioning to ensure content doesn't overlap */
 body {
-  padding-top: 60px; /* Adjust this to match the navbar height */
+  padding-top: 120px; /* Adjust this to match the navbar height */
 }
+ 
+ 
