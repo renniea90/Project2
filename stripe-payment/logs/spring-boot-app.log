@@ -14856,3 +14856,11 @@ com.stripe.exception.CardException: Your card was declined.; code: card_declined
 2024-09-06T10:06:43.978+01:00 DEBUG 18148 --- [StripePayment] [http-nio-8084-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [[com.stripe.stripe_payment.entity.PaymentLog@4f3c2555, com.stripe.stripe_payment.entity.PaymentLog@1 (truncated)...]
 2024-09-06T10:06:43.980+01:00 DEBUG 18148 --- [StripePayment] [http-nio-8084-exec-1] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
 2024-09-06T10:06:43.980+01:00 DEBUG 18148 --- [StripePayment] [http-nio-8084-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-09-06T10:06:46.258+01:00 DEBUG 18148 --- [StripePayment] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : Received: 0 records
+2024-09-06T10:06:46.259+01:00 DEBUG 18148 --- [StripePayment] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : Commit list: {}
+2024-09-06T10:06:51.267+01:00 DEBUG 18148 --- [StripePayment] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : Received: 0 records
+2024-09-06T10:06:51.267+01:00 DEBUG 18148 --- [StripePayment] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : Commit list: {}
+2024-09-06T10:06:56.277+01:00 DEBUG 18148 --- [StripePayment] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : Received: 0 records
+2024-09-06T10:06:56.277+01:00 DEBUG 18148 --- [StripePayment] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : Commit list: {}
+2024-09-06T10:07:01.281+01:00 DEBUG 18148 --- [StripePayment] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : Received: 0 records
+2024-09-06T10:07:01.281+01:00 DEBUG 18148 --- [StripePayment] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : Commit list: {}
