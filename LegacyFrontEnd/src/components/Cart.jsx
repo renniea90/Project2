@@ -40,7 +40,7 @@ const Cart = () => {
         const response = await axios.post('http://localhost:8084/api/payment/charge', null, {
             headers: {
                 token: "tok_visa", // Using the Stripe test token
-                amount: grandTotal, // Convert amount to the smallest unit (pence for GBP)
+                amount: grandTotal, 
             },
         });
         console.log(response);

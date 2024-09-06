@@ -27,7 +27,7 @@ public class StripeClient {
     public Charge chargeNewCard(String token, double amount) throws Exception {
         Map<String, Object> chargeParams = new HashMap<>();
         chargeParams.put("amount", (int)(amount * 100));
-        chargeParams.put("currency", "GBP");  // Set currency to GBP for Pounds Sterling
+        chargeParams.put("currency", "GBP");
         chargeParams.put("source", token);
         return Charge.create(chargeParams);
     }
