@@ -86,7 +86,7 @@ const AdminItemsTable = ({ items, setItems }) => {
 
   return (
     <div className="admin_items_table">
-      <h2>Amend Stock</h2>
+      <h2>Current Stock</h2>
       <table>
         <thead>
           <tr>

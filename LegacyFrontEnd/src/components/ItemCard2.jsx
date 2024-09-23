@@ -12,8 +12,8 @@ const ItemCard2 = ({ items, addToCart }) => {
                   {/* Item details section */}
                   <div className="item-card-content">
                       <h3>{item.name}</h3>
-                      <p>Price: £{item.price.toFixed(2)}</p>
-                      <p>In Stock: {item.quantity}</p>
+                      <h3>£{item.price.toFixed(2)}</h3>
+                      {/* <p>In Stock: {item.quantity}</p> */}
                       <button onClick={() => addToCart(item)} className="add-to-cart-button">Add to Cart</button>
                   </div>
               </div>

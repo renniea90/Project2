@@ -42,6 +42,10 @@ tfoot td {
     justify-content: space-between;
 }
 
+.checkout-button {
+    color: #4CAF50;
+}
+
 button, .minusButton {
 
     background-color: white;
@@ -51,6 +55,11 @@ button, .minusButton {
     cursor: pointer;
     border-radius: 0;
     font-size: x-large;
+}
+
+.checkout-btn {
+    background-color: #4CAF50;
+    color: white;
 }
 
 button:hover {

@@ -36,7 +36,7 @@ const Navbar = () => {
               {isAdmin && (
                 <Link to="/admin">ADMIN</Link>
               )}
-              <span>Welcome, {email}</span>
+              {/* <span>Welcome, {email}</span> */}
               <a
                 href="#"
                 onClick={(e) => {
@@ -50,7 +50,7 @@ const Navbar = () => {
           ) : (
             <div className="navbar-right">
              <Link to="/login">
-             <i className="fas fa-sign-in-alt"> Login</i>
+             <i className="fas fa-sign-in-alt"></i> Login
              </Link>
             </div>
           )}

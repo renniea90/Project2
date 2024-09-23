@@ -7,14 +7,13 @@
     position: fixed;
     right: 30px;
     top: 200px;
-    width: 25%; /* Ensure this is not too wide for your screen */
-    overflow-y: auto; /* Allows scrolling within the cart if it's too tall */
+    width: 26%; /* Ensure this is not too wide for your screen */
     font-size: x-large;
 }
 
 .add-new-item-card label {
     display: inline-block;
-    width: 200px; /* Set a fixed width for labels */
+    width: 190px; /* Set a fixed width for labels */
     font-size: x-large;
 }
 

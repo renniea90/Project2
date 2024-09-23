@@ -4,6 +4,7 @@
     max-width: 600px; /* Increased width for the form */
     width: 100%; /* Ensure it scales with screen size */
     padding: 80px; /* Increased padding for more space */
+    padding-top: 230px;
     border: 1px solid #ccc;
     border-radius: 8px; /* Slightly larger border-radius for a rounded look */
     background-color: #fff; /* Background color for the form */

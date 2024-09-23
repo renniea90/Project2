@@ -6,7 +6,7 @@
     padding-right: 700px;
     justify-content: left; /* Align the grid items to the left */
     width: auto; /* Adjust the width to fit content */
-    padding-top: 180px; /* Add padding to prevent overlap with the navbar */
+    padding-top: 70px; /* Add padding to prevent overlap with the navbar */
     box-sizing: border-box; /* Ensure padding doesn’t affect the width */
     margin-left: 0; /* Move the container to the left */
 }
