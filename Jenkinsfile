@@ -13,10 +13,10 @@ pipeline {
             }
         }
 
-        stage('Build Stockroom') {
+        stage('Build Items') {
             steps {
                 dir('Backend/LegacyCodeItems') { 
-                    echo 'Installing Items Dependencies'
+                    echo 'Installing Items'
                     bat '''
                     mvn clean install
                     '''
@@ -28,7 +28,7 @@ pipeline {
         stage('Build Cart') {
             steps {
                 dir('Backend/LegacyCodeCart') {
-                    echo 'Installing Cart Dependencies'
+                    echo 'Installing Cart'
                     bat '''
                     mvn clean install
                     '''
@@ -37,13 +37,14 @@ pipeline {
             }
         }
 
-        stage('Build Payments (Stripe)') {
+        stage('Build Stripe') {
             steps {
                 dir('Backend/stripe-payment') { 
-                    echo 'Building Stripe payment interface'
+                    echo 'Installing stripe-payment'
                     bat '''
                     mvn clean install
                     '''
+                    echo 'Deploying Stripe'
                 }
             }
         }
