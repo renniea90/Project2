@@ -1,21 +1,21 @@
 pipeline {
     agent any
     stages {
-        stage('Build Front End') {
+        stage('Build Frontend') {
             steps {
-                dir('front_end') { // Avoid spaces in folder names
+                dir('Frontend') { 
                     bat '''
                     npm install
                     npm run build
                     '''
-                    echo 'Deploying Front End'
+                    echo 'Deploying Frontend'
                 }
             }
         }
 
         stage('Build Stockroom') {
             steps {
-                dir('back_end/LegacyCodeItems') { // Navigate to items directory
+                dir('Backend/LegacyCodeItems') { /
                     echo 'Installing Items Dependencies'
                     bat '''
                     mvn clean install
@@ -27,7 +27,7 @@ pipeline {
 
         stage('Build Cart') {
             steps {
-                dir('back_end/LegacyCodeCart') { // Navigate to Cart directory
+                dir('Backend/LegacyCodeCart') {
                     echo 'Installing Cart Dependencies'
                     bat '''
                     mvn clean install
@@ -39,7 +39,7 @@ pipeline {
 
         stage('Build Payments (Stripe)') {
             steps {
-                dir('back_end/stripe-payment') { // Navigate to Stripe location
+                dir('Backend/stripe-payment') { 
                     echo 'Building Stripe payment interface'
                     bat '''
                     mvn clean install
