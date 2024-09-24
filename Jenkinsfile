@@ -8,6 +8,7 @@ pipeline {
                     bat '''
                     npm install
                     npm run build
+                    npm start
                     pm2 delete LegacyFrontEnd || true
                     pm2 start npm --name "LegacyFrontEnd" -- start
                     '''
