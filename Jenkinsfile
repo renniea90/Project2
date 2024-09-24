@@ -15,7 +15,7 @@ pipeline {
 
         stage('Build Stockroom') {
             steps {
-                dir('Backend/LegacyCodeItems') { /
+                dir('Backend/LegacyCodeItems') { 
                     echo 'Installing Items Dependencies'
                     bat '''
                     mvn clean install
