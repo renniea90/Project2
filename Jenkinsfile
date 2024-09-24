@@ -1,5 +1,6 @@
 pipeline {
     agent any
+    environment 
     stages {
         stage('Build Frontend') {
             steps {
@@ -7,6 +8,8 @@ pipeline {
                     bat '''
                     npm install
                     npm run build
+                    pm2 delete LegacyFrontEnd || true
+                    pm2 start npm --name "LegacyFrontEnd" -- start
                     '''
                     echo 'Deploying Frontend'
                 }
@@ -43,6 +46,7 @@ pipeline {
                     echo 'Installing stripe-payment'
                     bat '''
                     mvn clean install
+                    pm2 delete stripe-payment || truepm2 start java --name "stripe-payment" -- -jar target/stripe-payment-app.jar
                     '''
                     echo 'Deploying Stripe'
                 }
