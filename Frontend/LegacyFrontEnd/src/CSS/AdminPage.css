@@ -1,0 +1,66 @@
+.container2 {
+  text-align: center;
+  padding: 150px 20px 20px 20px;
+  margin: 0 auto;
+  margin-top: 10px;
+}
+
+.table-wrapper {
+  margin-top: 20px;
+  padding: 0 20px;
+  max-width: 70%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.table-container {
+  max-height: 700px;
+  overflow-y: auto;
+  background-color: #ffffff;
+}
+
+table {
+  font-family: 'Wix Madefor Display', Helvetica, sans-serif;
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: x-large;
+}
+
+th, td {
+  text-align: center;
+  padding: 8px;
+  border-bottom: 5px solid #eee;
+}
+
+th {
+  background-color: #ffffff;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #4a4a4a;
+  color: white;
+  border-radius: 0px;
+  cursor: pointer;
+  margin: 2px;
+  font-size: x-large;
+  font-family: 'Wix Madefor Display', Helvetica, sans-serif;
+}
+
+button:hover {
+  background-color: #191919;
+}
+
+th, td {
+  text-align: center;
+  padding: 8px;
+  border-bottom: 5px solid #eee;
+  vertical-align: middle; /* Ensure content aligns in the middle */
+}
+
+td img {
+  width: 100px;
+  height: auto;
+  object-fit: cover; /* Ensure images are uniform */
+}

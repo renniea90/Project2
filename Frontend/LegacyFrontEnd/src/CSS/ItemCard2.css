@@ -1,0 +1,87 @@
+.item-cards-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns layout */
+    gap: 20px;
+    padding: 20px;
+    padding-right: 700px;
+    justify-content: left; /* Align the grid items to the left */
+    width: auto; /* Adjust the width to fit content */
+    padding-top: 70px; /* Add padding to prevent overlap with the navbar */
+    box-sizing: border-box; /* Ensure padding doesn’t affect the width */
+    margin-left: 0; /* Move the container to the left */
+}
+
+.item-cards-container.adjust-left {
+    margin-left: 0px; /* Reset to zero or adjust this value to move further left */
+}
+
+/* Adjust margin-left to move the container further left or right */
+@media (min-width: 1024px) {
+    .item-cards-container {
+        margin-left: 0px; /* Remove any positive margin to align left */
+    }
+}
+
+.item-card {
+    width: 100%; /* Card width will adjust according to grid */
+    overflow: hidden;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.item-image {
+    width: 100%;
+    height: auto; /* Allow image to maintain its aspect ratio */
+    object-fit: contain; /* Ensure the whole image is visible */
+    margin: 0;
+}
+
+.item-card-content {
+    padding: 20px;
+    background-color: white;
+    text-align: center;
+}
+
+.item-card-content h3 {
+    margin: 0 0 10px 0;
+    font-size: xx-large;
+    font-family: 'Wix Madefor Display', Helvetica, sans-serif;
+}
+
+.item-card-content p {
+    margin: 4px 0;
+    font-size: x-large;
+    font-family: 'Wix Madefor Display', Helvetica, sans-serif;
+}
+
+.add-to-cart-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: x-large;
+    cursor: pointer;
+    margin-top: 20px;
+    align-self: center;
+}
+
+.add-to-cart-button:hover {
+    background-color: #45a049;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .item-cards-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
+        margin-left: 0; /* Keep the container left-aligned */
+    }
+}
+
+@media (max-width: 768px) {
+    .item-cards-container {
+        grid-template-columns: 1fr; /* 1 column on small screens */
+        margin-left: 0; /* Keep the container left-aligned */
+    }
+}

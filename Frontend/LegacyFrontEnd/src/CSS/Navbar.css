@@ -1,0 +1,53 @@
+.navbar {
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  padding: 10px 0; /* Adjust padding to control the height */
+  display: flex;
+  justify-content: center; /* Center the entire navbar content */
+  align-items: center;
+}
+ 
+.navbar-container {
+  display: flex;
+  justify-content: center; /* Center the container content */
+  align-items: center;
+}
+ 
+.navbar h1 {
+  margin: 0;
+  font-size: 130px; /* Adjusted to fit better */
+  font-family: 'Wix Madefor Display', Helvetica, sans-serif;
+  margin-right: 20px; /* Space between the title and links */
+  flex-shrink: 0; /* Prevent h1 from shrinking */
+}
+ 
+.navbar-links {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+ 
+.navbar-links a {
+  margin-left: 25px;
+  text-decoration: none;
+  color: #333;
+  font-size: 37px;
+  font-weight: bolder;
+  font-family: 'Wix Madefor Display', Helvetica, sans-serif;
+}
+ 
+.navbar-links a:hover {
+  text-decoration: underline;
+}
+ 
+/* Adjust positioning to ensure content doesn't overlap */
+body {
+  padding-top: 120px; /* Adjust this to match the navbar height */
+}
+ 
+ 
