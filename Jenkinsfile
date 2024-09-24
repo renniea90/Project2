@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build Frontend') {
             steps {
-                dir('Frontend') { 
+                dir('Frontend/LegacyFrontEnd') { 
                     bat '''
                     npm install
                     npm run build
