@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    environment 
+
     stages {
         stage('Build Frontend') {
             steps {
@@ -46,7 +46,8 @@ pipeline {
                     echo 'Installing stripe-payment'
                     bat '''
                     mvn clean install
-                    pm2 delete stripe-payment || truepm2 start java --name "stripe-payment" -- -jar target/stripe-payment-app.jar
+                    pm2 delete stripe-payment || true
+                    pm2 start java --name "stripe-payment" -- -jar target/stripe-payment-app.jar
                     '''
                     echo 'Deploying Stripe'
                 }
