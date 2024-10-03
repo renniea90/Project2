@@ -11,6 +11,8 @@ pipeline {
                     pm2 delete LegacyFrontEnd || true
                     pm2 start npm --name "LegacyFrontEnd" -- start
                     '''
+                    // Debugging step to list contents of the directory
+                    bat 'dir build'
                     echo 'Deploying Frontend'
                 }
             }
