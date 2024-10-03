@@ -73,10 +73,11 @@ pipeline {
             steps {
                 echo 'Deploying to Testing Environment'
                 bat '''
-                xcopy Frontend\\LegacyFrontEnd\\build C:\\Users\\User\\Desktop\\Project2TESTEnv\\frontend /E /I /Y
-                xcopy Backend\\LegacyCodeItems\\target\\*.jar C:\\Users\\User\\Desktop\\Project2TESTEnv\\backend /Y
-                xcopy Backend\\LegacyCodeCart\\target\\*.jar C:\\Users\\User\\Desktop\\Project2TESTEnv\\backend /Y
-                xcopy Backend\\stripe-payment\\target\\*.jar C:\\Users\\User\\Desktop\\Project2TESTEnv\\backend /Y
+                if not exist C:\\Users\\User\\Desktop\\Project2TESTEnv\\ (mkdir C:\\Users\\User\\Desktop\\Project2TESTEnv\\)
+                xcopy Frontend\\LegacyFrontEnd\\build C:\\Users\\User\\Desktop\\Project2TESTEnv\\frontend /E /I /Y || echo xcopy failed
+                xcopy Backend\\LegacyCodeItems\\target\\*.jar C:\\Users\\User\\Desktop\\Project2TESTEnv\\backend /Y || echo xcopy failed
+                xcopy Backend\\LegacyCodeCart\\target\\*.jar C:\\Users\\User\\Desktop\\Project2TESTEnv\\backend /Y || echo xcopy failed
+                xcopy Backend\\stripe-payment\\target\\*.jar C:\\Users\\User\\Desktop\\Project2TESTEnv\\backend /Y || echo xcopy failed
                 '''
             }
         }
@@ -86,10 +87,11 @@ pipeline {
                 input message: 'Deploy to Production?', ok: 'Deploy'
                 echo 'Deploying to Production Environment'
                 bat '''
-                xcopy Frontend\\LegacyFrontEnd\\build C:\\Users\\User\\Desktop\\Project2PRODEnv\\frontend /E /I /Y
-                xcopy Backend\\LegacyCodeItems\\target\\*.jar C:\\Users\\User\\Desktop\\Project2PRODEnv\\backend /Y
-                xcopy Backend\\LegacyCodeCart\\target\\*.jar C:\\Users\\User\\Desktop\\Project2PRODEnv\\backend /Y
-                xcopy Backend\\stripe-payment\\target\\*.jar C:\\Users\\User\\Desktop\\Project2PRODEnv\\backend /Y
+                if not exist C:\\Users\\User\\Desktop\\Project2PRODEnv\\ (mkdir C:\\Users\\User\\Desktop\\Project2PRODEnv\\)
+                xcopy Frontend\\LegacyFrontEnd\\build C:\\Users\\User\\Desktop\\Project2PRODEnv\\frontend /E /I /Y || echo xcopy failed
+                xcopy Backend\\LegacyCodeItems\\target\\*.jar C:\\Users\\User\\Desktop\\Project2PRODEnv\\backend /Y || echo xcopy failed
+                xcopy Backend\\LegacyCodeCart\\target\\*.jar C:\\Users\\User\\Desktop\\Project2PRODEnv\\backend /Y || echo xcopy failed
+                xcopy Backend\\stripe-payment\\target\\*.jar C:\\Users\\User\\Desktop\\Project2PRODEnv\\backend /Y || echo xcopy failed
                 '''
             }
         }
