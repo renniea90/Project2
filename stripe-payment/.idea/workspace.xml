@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f998de41-5d9c-4780-acb9-d446fcc17249" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../Jenkinsfile" beforeDir="false" afterPath="$PROJECT_DIR$/../Jenkinsfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LegacyCodeCart/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../LegacyCodeCart/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +46,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/User/Desktop/Project2/usersmanagementsystem"
+    "last_opened_file_path": "C:/Users/User/Desktop/Project2/Backend/stripe-payment"
   }
 }]]></component>
   <component name="RecentsManager">

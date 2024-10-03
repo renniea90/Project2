@@ -49,9 +49,11 @@ public class PaymentGatewayController {
             // Log the exception with detailed information
             logger.error("Payment failed for token: {} and amount: {}. Error: {}", token, amount, e.getMessage(), e);
 
-            // Send a failure message to Kafka
-            paymentStatusProducer.sendPaymentStatus("failed", null, amount, "GBP");
-            logger.info("Payment status sent to Kafka: failed");
+            // Send a failure message to Kafka if the producer is not null
+            if (paymentStatusProducer != null) {
+                paymentStatusProducer.sendPaymentStatus("failed", null, amount, "GBP");
+                logger.info("Payment status sent to Kafka: failed");
+            }
 
             // Return an internal server error response
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
