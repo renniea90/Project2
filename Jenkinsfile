@@ -6,9 +6,9 @@ pipeline {
             steps {
                 dir('Frontend/LegacyFrontEnd') {
                     bat '''
-                    runas /user:Administrator "npm install"
-                    runas /user:Administrator "npm run build"
-                    pm2 delete LegacyFrontEnd || true
+                    npm install
+                    npm run build
+                    pm2 delete LegacyFrontEnd || exit 0
                     pm2 start npm --name "LegacyFrontEnd" -- start
                     '''
                 }
@@ -22,7 +22,6 @@ pipeline {
                     bat '''
                     mvn clean install
                     '''
-                    echo 'Deploying Items'
                 }
             }
         }
@@ -34,7 +33,6 @@ pipeline {
                     bat '''
                     mvn clean install
                     '''
-                    echo 'Deploying Cart'
                 }
             }
         }
@@ -45,17 +43,15 @@ pipeline {
                     echo 'Installing stripe-payment'
                     bat '''
                     mvn clean install
-                    pm2 delete stripe-payment || true
+                    pm2 delete stripe-payment || exit 0
                     pm2 start java --name "stripe-payment" -- -jar target/stripe-payment-app.jar
                     '''
-                    echo 'Deploying Stripe'
                 }
             }
         }
 
         stage('Test') {
             steps {
-                // Test in each directory containing a pom.xml
                 dir('Backend/LegacyCodeItems') {
                     bat 'mvn test'
                 }
