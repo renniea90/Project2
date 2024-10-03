@@ -6,8 +6,8 @@ pipeline {
             steps {
                 dir('Frontend/LegacyFrontEnd') {
                     bat '''
-                    npm install
-                    npm run build
+                    runas /user:Administrator "npm install"
+                    runas /user:Administrator "npm run build"
                     pm2 delete LegacyFrontEnd || true
                     pm2 start npm --name "LegacyFrontEnd" -- start
                     '''
@@ -55,7 +55,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                // Make sure to test in each directory containing a pom.xml
+                // Test in each directory containing a pom.xml
                 dir('Backend/LegacyCodeItems') {
                     bat 'mvn test'
                 }
