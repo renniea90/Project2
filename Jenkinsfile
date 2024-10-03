@@ -69,6 +69,7 @@ pipeline {
                 echo 'Deploying to Testing Environment'
                 bat '''
                 if not exist C:\\Users\\User\\Desktop\\Project2TESTEnv\\ (mkdir C:\\Users\\User\\Desktop\\Project2TESTEnv\\)
+                if not exist C:\\Users\\User\\Desktop\\Project2TESTEnv\\backend (mkdir C:\\Users\\User\\Desktop\\Project2TESTEnv\\backend)
                 xcopy Frontend\\LegacyFrontEnd\\build C:\\Users\\User\\Desktop\\Project2TESTEnv\\frontend /E /I /Y || echo xcopy failed
                 xcopy Backend\\LegacyCodeItems\\target\\*.jar C:\\Users\\User\\Desktop\\Project2TESTEnv\\backend /Y || echo xcopy failed
                 xcopy Backend\\LegacyCodeCart\\target\\*.jar C:\\Users\\User\\Desktop\\Project2TESTEnv\\backend /Y || echo xcopy failed
@@ -83,6 +84,7 @@ pipeline {
                 echo 'Deploying to Production Environment'
                 bat '''
                 if not exist C:\\Users\\User\\Desktop\\Project2PRODEnv\\ (mkdir C:\\Users\\User\\Desktop\\Project2PRODEnv\\)
+                if not exist C:\\Users\\User\\Desktop\\Project2PRODEnv\\backend (mkdir C:\\Users\\User\\Desktop\\Project2PRODEnv\\backend)
                 xcopy Frontend\\LegacyFrontEnd\\build C:\\Users\\User\\Desktop\\Project2PRODEnv\\frontend /E /I /Y || echo xcopy failed
                 xcopy Backend\\LegacyCodeItems\\target\\*.jar C:\\Users\\User\\Desktop\\Project2PRODEnv\\backend /Y || echo xcopy failed
                 xcopy Backend\\LegacyCodeCart\\target\\*.jar C:\\Users\\User\\Desktop\\Project2PRODEnv\\backend /Y || echo xcopy failed
