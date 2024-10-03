@@ -56,11 +56,20 @@ pipeline {
 
         stage('Test') {
             steps {
-                bat 'mvn test'
+                // Make sure to test in each directory containing a pom.xml
+                dir('Backend/LegacyCodeItems') {
+                    bat 'mvn test'
+                }
+                dir('Backend/LegacyCodeCart') {
+                    bat 'mvn test'
+                }
+                dir('Backend/stripe-payment') {
+                    bat 'mvn test'
+                }
             }
         }
 
-        stage('Deploy to Testing') {  // Simulate deployment to the testing environment
+        stage('Deploy to Testing') {
             steps {
                 echo 'Deploying to Testing Environment'
                 bat '''
@@ -72,7 +81,7 @@ pipeline {
             }
         }
 
-        stage('Deploy to Production') { // Simulate deployment to the production environment
+        stage('Deploy to Production') {
             steps {
                 input message: 'Deploy to Production?', ok: 'Deploy'
                 echo 'Deploying to Production Environment'
@@ -86,9 +95,3 @@ pipeline {
         }
     }
 }
-
-// xcopy is used to copy the files and directories to the respective environment folders.
-// /E copies all subdirectories (including empty ones).
-// /I assumes that the destination is a directory.
-// /Y suppresses the prompt asking whether to overwrite existing files.
-// The manual input step for production ensures that the production deployment is only triggered after the testing deployment has been reviewed.
